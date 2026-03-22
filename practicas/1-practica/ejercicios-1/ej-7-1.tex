@@ -1,0 +1,68 @@
+\hypertarget{ej7}{}
+\noindent \textbf{Ejercicio 7.} Sean $p, q$ y $r$ tres variables de las que se sabe que:
+\begin{itemize}
+    \item $p$ y $q$ nunca están indefinidas,
+    \item $r$ se indefine sii $q$ es verdadera
+\end{itemize}
+Proponer una fórmula que nunca se indefina, utilizando siempre las tres variables y que sea verdadera si y solo si se cumple que:
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+    \item Al menos una es verdadera.
+    \item Ninguna es verdadera.
+    \item Exactamente una de las tres es verdadera.
+    \item Sólo $p$ y $q$ son verdaderas.
+    \item No todas al mismo tiempo son verdaderas.
+    \item $r$ es verdadera.
+\end{enumerate}
+\end{multicols}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+El dato clave del ejercicio es: **Si $q=V$, entonces $r=\bot$**. 
+Esto significa que nunca podemos evaluar $r$ si $q$ es verdadero. Debemos proteger siempre a $r$ usando operadores de cortocircuito, típicamente poniéndola a la derecha de un $(\neg q \wedge_L \dots)$ o un $(q \vee_L \dots)$. Además, el enunciado exige que las fórmulas utilicen explícitamente las tres variables.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Al menos una es verdadera.} \\
+    Fórmula: $p \vee q \vee_L r$ \\
+    \textit{Justificación:} Evaluando de izquierda a derecha, si $q$ es $V$, el operador $\vee_L$ hace cortocircuito y devuelve $V$ sin mirar $r$ (lo cual es correcto porque ya hay al menos una verdadera). Si $q$ es $F$, es seguro evaluar $r$, y la proposición completa resultará verdadera si $p$ o $r$ lo son.
+
+    \vspace{0.4cm}
+    \item \textbf{Ninguna es verdadera.} \\
+    Fórmula: $\neg p \wedge \neg q \wedge_L \neg r$ \\
+    \textit{Justificación:} Si $q$ es $V$, entonces $\neg q$ es $F$. El operador $\wedge_L$ hace cortocircuito y devuelve $F$ automáticamente, protegiendo a $r$. Esto es correcto porque si $q$ es $V$, es imposible que "ninguna sea verdadera". Si $q$ es $F$, entonces $\neg q$ es $V$, y se procede a evaluar $r$ de forma segura.
+
+    \vspace{0.4cm}
+    \item \textbf{Exactamente una de las tres es verdadera.} \\
+    Fórmula: $(q \wedge \neg p) \vee (\neg q \wedge_L ((p \wedge \neg r) \vee (\neg p \wedge r)))$ \\
+    \textit{Justificación:} Dividimos en dos casos lógicos:
+    \begin{itemize}
+        \item Si $q=V$: Sabemos que $r=\bot$ (no es verdadera). Para que "exactamente una" sea verdadera, $p$ debe ser $F$. El primer paréntesis evalúa a $\neg p$. El segundo paréntesis hace cortocircuito en $\neg q = F$ y no evalúa $r$.
+        \item Si $q=F$: El primer paréntesis es $F$. El segundo pasa a evaluar la disyunción exclusiva entre $p$ y $r$, verificando que exactamente una de las dos restantes sea verdadera.
+    \end{itemize}
+
+    \vspace{0.4cm}
+    \item \textbf{Sólo $p$ y $q$ son verdaderas.} \\
+    Fórmula: $p \wedge q \wedge (q \vee_L r)$ \\
+    \textit{Justificación:} Si $q=V$, el paréntesis $(q \vee_L r)$ hace cortocircuito y da $V$. La fórmula queda evaluando $p \wedge V \wedge V \equiv p$. Si $q=F$, el paréntesis evalúa a $r$, pero como tenemos $q$ en la conjunción principal, toda la expresión da $F$ automáticamente, lo cual es correcto ya que exigíamos que $q$ sea verdadera.
+
+    \vspace{0.4cm}
+    \item \textbf{No todas al mismo tiempo son verdaderas.} \\
+    Fórmula: $\neg (p \wedge q \wedge (\neg q \wedge_L r))$ \\
+    \textit{Justificación:} Analicemos la frase: como si $q=V \Rightarrow r=\bot$, es imposible que $q$ y $r$ sean verdaderas al mismo tiempo en cualquier escenario. Por lo tanto, "no todas son verdaderas a la vez" es una Tautología (siempre es V). Construimos una fórmula que siempre da Falso para luego negarla: El término $(\neg q \wedge_L r)$ protege a $r$ de forma segura. Como está en conjunción con $q$, siempre da Falso. La negación exterior lo vuelve siempre Verdadero.
+
+    \vspace{0.4cm}
+    \item \textbf{$r$ es verdadera.} \\
+    Fórmula: $(\neg q \wedge_L r) \wedge (p \vee \neg p)$ \\
+    \textit{Justificación:} Si $q=V$, $r=\bot$, por lo que $r$ no es verdadera (es indefinida). La expresión debe dar $F$. El término $(\neg q \wedge_L r)$ hace cortocircuito en $F$ y lo logra. Si $q=F$, evalúa $r$ y devuelve su valor. Multiplicamos la expresión por la tautología $(p \vee \neg p)$ únicamente para cumplir con el requisito del enunciado de "utilizar siempre las tres variables" sin alterar el valor de verdad.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
