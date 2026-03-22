@@ -1,0 +1,148 @@
+% --- ejercicio_1.tex ---
+\hypertarget{ej1}{}
+\noindent \textbf{Ejercicio 1.} Determinar los valores de verdad de las siguientes proposiciones cuando el valor de verdad de $a$, $b$ y $c$ es verdadero y el de $x$ e $y$ es falso.
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+    \item $(\neg x \vee b)$
+    \item $((c \vee (y \wedge a)) \vee b)$
+    \item $\neg(c \vee y)$
+    \item $\neg(y \vee c)$
+    \item $(\neg(c \vee y) \leftrightarrow (\neg c \wedge \neg y))$
+    \item $((c \vee y) \wedge (a \vee b))$
+    \item $(((c \vee y) \wedge (a \vee b)) \leftrightarrow (c \vee (y \wedge a) \vee b))$
+    \item $(\neg c \wedge \neg y)$
+\end{enumerate}
+\end{multicols}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\textbf{a)} Para dar una demostración del valor de verdad de esta proposición, primero identificamos 
+los valores dados por el enunciado. Sabemos que el valor de $b$ es verdadero ($V$) y el de $x$ es falso ($F$).
+
+Como ya tenemos sus valores fijos, basta con armar una pequeña tabla de valores paso a paso. Primero calculamos la negación de $x$ ($\neg x$) y luego resolvemos la disyunción lógica ($\vee$) con $b$:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$x$ & $\neg x$ & $b$ & $(\neg x \vee b)$ \\
+\hline
+F & V & V & \textbf{V} \\
+\hline
+\end{tabular}
+\end{center}
+
+Y así comprobamos que la proposición $(\neg x \vee b)$ es \textbf{Verdadera}.
+
+\vspace{0.4cm}
+\textbf{b)} Para resolver esta proposición, primero reemplazamos los valores conocidos: $c=V$, $y=F$, $a=V$ y $b=V$. Al igual que en matemática, resolvemos de adentro hacia afuera, comenzando por el paréntesis más interno $(y \wedge a)$:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$c$ & $y$ & $a$ & $b$ & $(y \wedge a)$ & $(c \vee (y \wedge a))$ & $((c \vee (y \wedge a)) \vee b)$ \\
+\hline
+V & F & V & V & F & V & \textbf{V} \\
+\hline
+\end{tabular}
+\end{center}
+
+Y así comprobamos que la proposición es \textbf{Verdadera}.
+
+\vspace{0.4cm}
+\textbf{c)} Reemplazamos $c=V$ e $y=F$. Primero evaluamos la disyunción dentro del paréntesis y luego aplicamos la negación al resultado final:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$c$ & $y$ & $(c \vee y)$ & $\neg(c \vee y)$ \\
+\hline
+V & F & V & \textbf{F} \\ 
+\hline
+\end{tabular}
+\end{center}
+
+Por lo tanto, concluimos que la proposición es \textbf{Falsa}.
+
+\vspace{0.4cm}
+\textbf{d)} Como la disyunción lógica es conmutativa ($c \vee y \equiv y \vee c$), esta expresión es lógicamente equivalente a la del inciso anterior. Lo comprobamos armando la tabla con $y=F$ y $c=V$:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$y$ & $c$ & $(y \vee c)$ & $\neg(y \vee c)$ \\
+\hline
+F & V & V & \textbf{F} \\
+\hline
+\end{tabular}
+\end{center}
+
+Y así comprobamos que, efectivamente, la proposición también es \textbf{Falsa}.
+
+\vspace{0.4cm}
+\textbf{e)} Aquí estamos frente a una de las Leyes de De Morgan, por lo que sabemos de antemano que debería resultar en una tautología (verdadera sin importar los valores). Lo demostramos reemplazando con nuestros valores dados $c=V$ e $y=F$:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$c$ & $y$ & $\neg(c \vee y)$ & $\neg c$ & $\neg y$ & $(\neg c \wedge \neg y)$ & $(\neg(c \vee y) \leftrightarrow (\neg c \wedge \neg y))$ \\
+\hline
+V & F & F & F & V & F & \textbf{V} \\
+\hline
+\end{tabular}
+\end{center}
+
+Al tener el mismo valor de verdad de ambos lados ($F \leftrightarrow F$), comprobamos que la proposición es \textbf{Verdadera}.
+
+\vspace{0.4cm}
+\textbf{f)} Reemplazamos $c=V$, $y=F$, $a=V$ y $b=V$. Evaluamos de forma independiente las dos disyunciones de los paréntesis y luego las unimos con la conjunción principal:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$c$ & $y$ & $a$ & $b$ & $(c \vee y)$ & $(a \vee b)$ & $((c \vee y) \wedge (a \vee b))$ \\
+\hline
+V & F & V & V & V & V & \textbf{V} \\
+\hline
+\end{tabular}
+\end{center}
+
+Como ambos lados de la conjunción son verdaderos, la proposición es \textbf{Verdadera}.
+
+\vspace{0.4cm}
+\textbf{g)} Si observamos con atención, el lado izquierdo de esta equivalencia es exactamente la proposición que evaluamos en el inciso \textbf{f)}, y el lado derecho es la que evaluamos en el inciso \textbf{b)}. Para ahorrar tiempo y no hacer una tabla gigante, podemos usar esos resultados directamente:
+
+\begin{center}
+\begin{tabular}{|c|c|c|} 
+\hline
+Lado Izquierdo (inciso f) & Lado Derecho (inciso b) & Equivalencia ($\leftrightarrow$) \\
+\hline
+V & V & \textbf{V} \\
+\hline
+\end{tabular}
+\end{center}
+
+Como ambos lados evalúan a verdadero ($V \leftrightarrow V$), comprobamos que la proposición final es \textbf{Verdadera}.
+
+\vspace{0.4cm}
+\textbf{h)} Reemplazamos $c=V$ e $y=F$. Evaluamos primero sus respectivas negaciones y finalmente aplicamos la conjunción:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$c$ & $y$ & $\neg c$ & $\neg y$ & $(\neg c \wedge \neg y)$ \\
+\hline
+V & F & F & V & \textbf{F} \\
+\hline
+\end{tabular}
+\end{center}
+
+La conjunción requiere que ambos términos sean verdaderos para ser verdadera. Como $\neg c$ es falso, comprobamos que la proposición es \textbf{Falsa}.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
