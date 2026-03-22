@@ -1,0 +1,43 @@
+% --- preambulo.tex ---
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=2.5cm, headheight=15pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{parskip}
+
+% Colores
+\definecolor{algoblue}{RGB}{0, 82, 155}
+\definecolor{tipbg}{RGB}{245, 245, 250}
+\definecolor{tipframe}{RGB}{200, 200, 220}
+
+% Encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Algoritmos y Estructuras de Datos}}
+\fancyhead[R]{\textbf{Guía 1}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\hyperlink{indice}{\color{algoblue}Ir al índice $\uparrow$}}
+
+% Macros
+\newcommand{\aportar}{
+    \vspace{0.5cm}
+    \begin{center}
+        \small \textit{¡Aportá con correcciones, mandando ejercicios al repo, críticas, todo sirve! \\ La idea es que la guía esté actualizada y con el mínimo de errores.}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newtcolorbox{disclaimerbox}{
+    colback=tipbg,
+    colframe=tipframe,
+    fonttitle=\bfseries,
+    title=¡Recomendación para sacarle jugo al apunte!,
+    arc=3mm, boxrule=1pt, left=10pt, right=10pt, top=10pt, bottom=10pt
+}
