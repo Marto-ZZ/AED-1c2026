@@ -1,4 +1,3 @@
-% --- preambulo.tex ---
 \documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -17,21 +16,23 @@
 \definecolor{tipbg}{RGB}{245, 245, 250}
 \definecolor{tipframe}{RGB}{200, 200, 220}
 
-% Encabezados
+% --- ENCABEZADOS Y PIES DE PÁGINA ---
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\textbf{Algoritmos y Estructuras de Datos}}
 \fancyhead[R]{\textbf{Guía 1}}
+\fancyfoot[L]{\mensajepie} % <--- Acá se inyecta el mensaje random automáticamente
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{\hyperlink{indice}{\color{algoblue}Ir al índice $\uparrow$}}
 
 % Macros
-\newcommand{\aportar}{
-    \vspace{0.5cm}
-    \begin{center}
-        \small \textit{¡Aportá con correcciones, mandando ejercicios al repo, críticas, todo sirve! \\ La idea es que la guía esté actualizada y con el mínimo de errores.}
-    \end{center}
-    \vspace{0.5cm}
+\newcommand{\mensajepie}{%
+    \pgfmathparse{int(random(1,3))}% Genera un número del 1 al 3
+    \ifcase\pgfmathresult\relax%
+    \or \textcolor{gray}{\scriptsize $\star$ ¿Te sirvió el apunte? ¡Dejale una estrellita al repo!}% Opción 1
+    \or \textcolor{gray}{\scriptsize !` ¿Encontraste un error? ¡Mandá un PR o abrí un issue!}% Opción 2
+    \or \textcolor{gray}{\scriptsize $\langle / \rangle$ ¡Aportá tus resoluciones! Todo sirve para mejorar.}% Opción 3
+    \fi
 }
 
 \newtcolorbox{disclaimerbox}{
