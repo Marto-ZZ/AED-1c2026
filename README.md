@@ -19,8 +19,8 @@ AED-1c2026/
 |   |   |   └── ej-z-i.tex   ← formato de archivo .tex de cada ejercicio número z de la guía i
 |   |   ├── i-sol.tex        ← guía resuelta en laTex
 |   |   ├── i-sol.pdf        ← guía resuelta en pdf
-└── macros/                  ← Elementos de referencia para el archivo de soluciones
-    └── preambulo.tex
+└────── macros/              ← Elementos de referencia para el archivo de soluciones
+        └── preambulo.tex
 ```
 
 ---
