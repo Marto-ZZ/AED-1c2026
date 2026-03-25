@@ -1,0 +1,56 @@
+\hypertarget{ej12}{}
+\noindent \textbf{Ejercicio 12.} Sean $P(x:\mathbb{Z})$ y $Q(x:\mathbb{Z})$ dos predicados cualesquiera que nunca se indefinen y sean a, b y k enteros. Decidir en cada caso la relación de fuerza entre las dos fórmulas:
+
+\begin{enumerate}[label=\alph*)]
+    \item $P(3) \quad \text{y} \quad (\forall n: \mathbb{Z}) (0 \leq n < 5 \rightarrow P(n))$
+    \item $P(3) \quad \text{y} \quad (\exists n: \mathbb{Z}) (0 \leq n < 5 \wedge P(n))$
+    \item $(\forall n:\mathbb{Z})((0 \leq n < 10 \wedge P(n)) \rightarrow Q(n)) \quad \text{y} \quad (\forall n: \mathbb{Z}) (0 \leq n < 10 \rightarrow Q(n))$
+    \item $(\exists n:\mathbb{Z})(0 \leq n < 10 \wedge P(n) \wedge Q(n)) \quad \text{y} \quad (\forall n: \mathbb{Z}) (0 \leq n < 10 \rightarrow Q(n))$
+    \item $k=0 \wedge (\exists n:\mathbb{Z})(0 \leq n < 10 \wedge P(n) \wedge Q(n)) \quad \text{y} \quad k=0 \wedge (\forall n:\mathbb{Z})(0 \leq n < k \rightarrow Q(n))$
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+Recordemos del Ejercicio 5 que una proposición $\alpha$ es más fuerte que $\beta$ si la implicación $\alpha \rightarrow \beta$ es una tautología (siempre verdadera). Dicho de otra forma, siempre que $\alpha$ se cumple, $\beta$ está obligada a cumplirse.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item Llamemos $\alpha = P(3)$ y $\beta = (\forall n: \mathbb{Z}) (0 \leq n < 5 \rightarrow P(n))$. \\
+    - ¿$\alpha \rightarrow \beta$? Que $P$ valga para el número 3 no garantiza que valga para todos los números del 0 al 4. (No es tautología). \\
+    - ¿$\beta \rightarrow \alpha$? Si sabemos que $P$ se cumple para \textbf{todos} los enteros entre 0 y 4, entonces obligatoriamente se cumple para el 3 (porque $0 \leq 3 < 5$). (Es tautología). \\
+    \underline{\textbf{$\beta$ es más fuerte que $\alpha$.}}
+
+    \vspace{0.4cm}
+    \item Llamemos $\alpha = P(3)$ y $\beta = (\exists n: \mathbb{Z}) (0 \leq n < 5 \wedge P(n))$. \\
+    - ¿$\alpha \rightarrow \beta$? Si sabemos que $P(3)$ es verdadero, entonces automáticamente \textbf{existe} al menos un número entre el 0 y el 4 que cumple $P$ (justamente, el 3). (Es tautología). \\
+    - ¿$\beta \rightarrow \alpha$? Saber que \textit{algún} número en ese rango cumple $P$ no nos garantiza que sea específicamente el 3 (podría ser el 1, por ejemplo). (No es tautología). \\
+    \underline{\textbf{$\alpha$ es más fuerte que $\beta$.}}
+
+    \vspace{0.4cm}
+    \item $\alpha$ afirma que \textit{si} un número en el rango cumple $P$, entonces cumple $Q$. $\beta$ afirma que \textbf{todos} los números en el rango cumplen $Q$ directamente (sin condiciones). \\
+    - ¿$\alpha \rightarrow \beta$? Si solo sabemos que los que cumplen $P$ cumplen $Q$, podría haber números que no cumplan $P$ y tampoco $Q$. Así que $\beta$ no está obligada a ser cierta. \\
+    - ¿$\beta \rightarrow \alpha$? Si sabemos como hecho absoluto que \textbf{todos} en el rango cumplen $Q$ ($\beta$ es verdadera), entonces cualquier condición que le pongamos adelante (como exigir $P(n)$) resultará en una implicación verdadera, porque el consecuente $Q(n)$ ya está garantizado. \\
+    \underline{\textbf{$\beta$ es más fuerte que $\alpha$.}}
+
+    \vspace{0.4cm}
+    \item $\alpha$ afirma que existe al menos un número que cumple ambas ($P$ y $Q$). $\beta$ afirma que todos los números cumplen $Q$. \\
+    - ¿$\alpha \rightarrow \beta$? Que un solo elemento cumpla todo no obliga a que \textbf{todos} los demás cumplan $Q$. \\
+    - ¿$\beta \rightarrow \alpha$? Que todos cumplan $Q$ no garantiza que alguno cumpla $P$. Podría ocurrir que $P$ sea falso para todos, haciendo que $\alpha$ sea falsa. \\
+    \underline{\textbf{Son incomparables (ninguna es más fuerte).}}
+
+    \vspace{0.4cm}
+    \item Este es el inciso trampa. Analicemos $\beta$: la segunda parte exige $(\forall n:\mathbb{Z})(0 \leq n < k \rightarrow Q(n))$. Como la primera parte fija $k=0$, el rango queda $0 \leq n < 0$. Este antecedente es siempre Falso, por lo que esa implicación universal es \textbf{siempre verdadera} por vacuidad. Entonces $\beta$ equivale lógicamente a $(k=0 \wedge True)$, que es simplemente $k=0$. \\
+    La fórmula $\alpha$ equivale a $(k=0 \wedge \text{Existencial})$. \\
+    - ¿$\alpha \rightarrow \beta$? Si ocurre $(k=0 \wedge \text{Existencial})$, es obvio que ocurre $k=0$. Es decir, $(X \wedge Y) \rightarrow X$ es una tautología. \\
+    - ¿$\beta \rightarrow \alpha$? Si sabemos que $k=0$, no tenemos idea de si el existencial es verdadero o falso. \\
+    \underline{\textbf{$\alpha$ es más fuerte que $\beta$.}}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
