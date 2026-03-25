@@ -1,0 +1,50 @@
+\hypertarget{ej9}{}
+\noindent \textbf{Ejercicio 9.} Sea $P(x:\mathbb{Z})$ y $Q(x:\mathbb{Z})$ dos predicados cualquiera. Explicar cuál es el error de traducción a fórmulas de los siguientes enunciados. Dar un ejemplo en el cuál sucede el problema y luego corregirlo.
+
+\begin{enumerate}[label=\alph*)]
+    \item "Todos los naturales menores a 10 cumple P" \\
+    $(\forall i:\mathbb{Z})(0 \leq i < 10 \wedge P(i))$
+    \item "Algún natural menor a 10 cumple P" \\
+    $(\exists i:\mathbb{Z})(0 \leq i < 10 \rightarrow P(i))$
+    \item "Todos los naturales menores a 10 que cumplen P, cumplen Q" \\
+    $(\forall x:\mathbb{Z})(0 \leq x < 10 \rightarrow (P(x) \wedge Q(x)))$
+    \item "No hay ningún natural menor a 10 que cumpla P y Q" \\
+    $\neg (\exists x:\mathbb{Z})(0 \leq x < 10 \wedge P(x)) \wedge \neg (\exists x:\mathbb{Z})(0 \leq x < 10 \wedge Q(x))$
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Error:} Se utilizó una conjunción ($\wedge$) para filtrar el dominio dentro de un cuantificador universal ($\forall$). \\
+    \textbf{Ejemplo de fallo:} Si evaluamos la fórmula para $i=15$, la primera parte de la conjunción resulta falsa ($0 \leq 15 < 10 \equiv Falso$). Como es una conjunción, toda la expresión para $i=15$ es Falsa. Y como el cuantificador exige que \textit{para todo} entero la expresión sea Verdadera, toda la proposición colapsa y se vuelve Falsa, sin importar si los menores a 10 realmente cumplían $P$ o no. \\
+    \textbf{Corrección:} Para filtrar en un $\forall$, debemos usar la implicación ($\rightarrow$). Así, los números fuera del rango hacen falso al antecedente y la implicación da Verdadero (por vacuidad), dejándonos evaluar $P$ solo donde nos importa.
+    \[ (\forall i:\mathbb{Z})(0 \leq i < 10 \rightarrow P(i)) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Error:} Se utilizó una implicación ($\rightarrow$) dentro de un cuantificador existencial ($\exists$). \\
+    \textbf{Ejemplo de fallo:} Si evaluamos para $i=15$, el antecedente de la implicación es falso ($0 \leq 15 < 10 \equiv Falso$). Por definición de implicación, un antecedente falso hace que la expresión completa sea Verdadera. Por lo tanto, el $\exists$ encuentra a $i=15$ (o a cualquier otro número fuera del rango) como un caso de éxito y la fórmula devuelve Verdadero, afirmando que "existe un natural menor a 10 que cumple P" basándose en un número que ni siquiera está en el rango. \\
+    \textbf{Corrección:} Para exigir condiciones simultáneas en un $\exists$, debemos usar la conjunción ($\wedge$).
+    \[ (\exists i:\mathbb{Z})(0 \leq i < 10 \wedge P(i)) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Error:} La fórmula propuesta significa "Todos los naturales menores a 10 cumplen P \textit{y además} cumplen Q". El enunciado original no exige que todos cumplan P; dice que \textit{si} lo cumplen, entonces también deben cumplir Q (es una condición). \\
+    \textbf{Ejemplo de fallo:} Supongamos que el número 3 no cumple P. La fórmula propuesta evaluará a Falso para $x=3$ porque $(F \wedge Q(3)) \equiv F$, y por ende el $\forall$ dará Falso. Sin embargo, según el enunciado original en lenguaje natural, que el 3 no cumpla P no es un problema (simplemente no entra en el grupo de los que deben cumplir Q). \\
+    \textbf{Corrección:} Agrupar la pertenencia al rango y el cumplimiento de P como antecedente de la implicación hacia Q.
+    \[ (\forall x:\mathbb{Z})((0 \leq x < 10 \wedge P(x)) \rightarrow Q(x)) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Error:} La fórmula distribuyó la negación existencial, lo que cambió drásticamente el significado. La fórmula propuesta afirma: "No hay ningún natural menor a 10 que cumpla P, \textit{y además} no hay ningún natural menor a 10 que cumpla Q" (es decir, ninguno cumple ninguna de las dos). El enunciado original prohíbe que alguien cumpla \textit{ambas al mismo tiempo}. \\
+    \textbf{Ejemplo de fallo:} Supongamos que $x=2$ cumple P pero no Q, y $x=3$ cumple Q pero no P. El enunciado original sería Verdadero (porque nadie cumple ambas a la vez). Sin embargo, la fórmula propuesta será Falsa, porque la primera parte $\neg(\exists x \dots P(x))$ evalúa a Falso (¡ya que el 2 sí cumple P!). \\
+    \textbf{Corrección:} Negar la existencia de un elemento que cumpla todas las condiciones en simultáneo mediante una gran conjunción.
+    \[ \neg (\exists x:\mathbb{Z})(0 \leq x < 10 \wedge P(x) \wedge Q(x)) \]
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}

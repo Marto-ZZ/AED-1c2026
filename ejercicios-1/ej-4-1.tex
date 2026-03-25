@@ -1,0 +1,129 @@
+\hypertarget{ej4}{}
+\noindent \textbf{Ejercicio 4.} Determinar si las siguientes fórmulas son tautologías, contradicciones o contingencias.
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+    \item $(p \vee \neg p)$
+    \item $(p \wedge \neg p)$
+    \item $((\neg p \vee q) \leftrightarrow (p \rightarrow q))$
+    \item $((p \wedge q) \rightarrow p)$
+    \item $((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))$
+    \item $((p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r)))$
+\end{enumerate}
+\end{multicols}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{$(p \vee \neg p)$} \\
+    Armamos la tabla de verdad clásica:
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    $p$ & $\neg p$ & $(p \vee \neg p)$ \\
+    \hline
+    V & F & \textbf{V} \\
+    F & V & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Como todos los resultados son verdaderos independientemente del valor de $p$, es una \underline{\textbf{Tautología}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$(p \wedge \neg p)$}
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    $p$ & $\neg p$ & $(p \wedge \neg p)$ \\
+    \hline
+    V & F & \textbf{F} \\
+    F & V & \textbf{F} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Como todos los resultados son falsos, es una \underline{\textbf{Contradicción}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$((\neg p \vee q) \leftrightarrow (p \rightarrow q))$}
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $(\neg p \vee q)$ & $(p \rightarrow q)$ & Equivalencia ($\leftrightarrow$) \\
+    \hline
+    V & V & V & V & \textbf{V} \\
+    V & F & F & F & \textbf{V} \\
+    F & V & V & V & \textbf{V} \\
+    F & F & V & V & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Ambos lados tienen los mismos valores de verdad, por lo tanto la equivalencia es una \underline{\textbf{Tautología}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$((p \wedge q) \rightarrow p)$}
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $(p \wedge q)$ & $((p \wedge q) \rightarrow p)$ \\
+    \hline
+    V & V & V & \textbf{V} \\
+    V & F & F & \textbf{V} \\
+    F & V & F & \textbf{V} \\
+    F & F & F & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Como no hay ningún caso donde el antecedente sea verdadero y el consecuente falso, la implicación siempre se cumple. Es una \underline{\textbf{Tautología}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))$} \\
+    Esta es la propiedad distributiva de la conjunción sobre la disyunción. Evaluando las 8 combinaciones posibles para $p, q, r$, vemos que el bicondicional siempre se cumple:
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $r$ & Lado Izq. & Lado Der. & ($\leftrightarrow$) \\
+    \hline
+    V & V & V & V & V & \textbf{V} \\
+    V & V & F & V & V & \textbf{V} \\
+    V & F & V & V & V & \textbf{V} \\
+    V & F & F & F & F & \textbf{V} \\
+    F & V & V & F & F & \textbf{V} \\
+    F & V & F & F & F & \textbf{V} \\
+    F & F & V & F & F & \textbf{V} \\
+    F & F & F & F & F & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Es una \underline{\textbf{Tautología}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$((p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r)))$} \\
+    Nuevamente, al evaluar las 8 combinaciones posibles, el resultado de la implicación principal nunca tiene un antecedente $V$ con consecuente $F$.
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $r$ & Lado Izq. & Lado Der. & ($\rightarrow$) \\
+    \hline
+    V & V & V & V & V & \textbf{V} \\
+    V & V & F & F & F & \textbf{V} \\
+    V & F & V & V & V & \textbf{V} \\
+    V & F & F & V & V & \textbf{V} \\
+    F & V & V & V & V & \textbf{V} \\
+    F & V & F & V & V & \textbf{V} \\
+    F & F & V & V & V & \textbf{V} \\
+    F & F & F & V & V & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Es una \underline{\textbf{Tautología}}.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
