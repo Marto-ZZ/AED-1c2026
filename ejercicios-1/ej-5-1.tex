@@ -1,0 +1,132 @@
+\hypertarget{ej5}{}
+\noindent \textbf{Ejercicio 5.} Dadas las proposiciones lógicas $\alpha$ y $\beta$, se dice que $\alpha$ es más fuerte que $\beta$ si y sólo si $\alpha \rightarrow \beta$ es una tautología. En este caso, también decimos que $\beta$ es más débil que $\alpha$. Determinar la relación de fuerza de los siguientes pares de fórmulas:
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+    \item True, False
+    \item $(p \wedge q)$, $(p \vee q)$
+    \item $p$, $(p \wedge q)$
+    \item $p$, $(p \vee q)$
+    \item $p$, $q$
+    \item $p$, $(p \rightarrow q)$
+\end{enumerate}
+\end{multicols}
+
+\noindent ¿Cuál es la proposición más fuerte y cuál la más débil de las que aparecen en este ejercicio?
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+Para determinar la relación de fuerza, debemos evaluar la implicación en ambos sentidos: $\alpha \rightarrow \beta$ y $\beta \rightarrow \alpha$. Si una de estas implicaciones resulta en una Tautología (todos sus valores verdaderos), entonces su antecedente es la proposición más fuerte.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{True, False} \\
+    Llamemos $\alpha = True$ y $\beta = False$. Evaluamos las implicaciones directamente por definición:
+    \begin{itemize}
+        \item $\alpha \rightarrow \beta \equiv True \rightarrow False \equiv \text{False}$ (No es tautología)
+        \item $\beta \rightarrow \alpha \equiv False \rightarrow True \equiv \text{True}$ (Es tautología)
+    \end{itemize}
+    Como el antecedente que genera la tautología es el False, concluimos que \underline{\textbf{$False$ es más fuerte que $True$}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$(p \wedge q)$, $(p \vee q)$} \\
+    Llamemos $\alpha = (p \wedge q)$ y $\beta = (p \vee q)$. Armamos la tabla de verdad evaluando el ida ($\rightarrow$) y la vuelta ($\leftarrow$):
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $\alpha : (p \wedge q)$ & $\beta : (p \vee q)$ & $\alpha \rightarrow \beta$ & $\beta \rightarrow \alpha$ \\
+    \hline
+    V & V & V & V & \textbf{V} & V \\
+    V & F & F & V & \textbf{V} & F \\
+    F & V & F & V & \textbf{V} & F \\
+    F & F & F & F & \textbf{V} & V \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Vemos que $\alpha \rightarrow \beta$ es una tautología. Por lo tanto, \underline{\textbf{$(p \wedge q)$ es más fuerte que $(p \vee q)$}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$p$, $(p \wedge q)$} \\
+    Llamemos $\alpha = p$ y $\beta = (p \wedge q)$:
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $\beta : (p \wedge q)$ & $\alpha \rightarrow \beta$ & $\beta \rightarrow \alpha$ \\
+    \hline
+    V & V & V & V & \textbf{V} \\
+    V & F & F & F & \textbf{V} \\
+    F & V & F & V & \textbf{V} \\
+    F & F & F & V & \textbf{V} \\
+    \hline
+    \end{tabular}
+    \end{center}
+    La tautología se da en $\beta \rightarrow \alpha$. Por lo tanto, \underline{\textbf{$(p \wedge q)$ es más fuerte que $p$}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$p$, $(p \vee q)$} \\
+    Llamemos $\alpha = p$ y $\beta = (p \vee q)$:
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $\beta : (p \vee q)$ & $\alpha \rightarrow \beta$ & $\beta \rightarrow \alpha$ \\
+    \hline
+    V & V & V & \textbf{V} & V \\
+    V & F & V & \textbf{V} & V \\
+    F & V & V & \textbf{V} & F \\
+    F & F & F & \textbf{V} & V \\
+    \hline
+    \end{tabular}
+    \end{center}
+    La tautología se da en $\alpha \rightarrow \beta$. Por lo tanto, \underline{\textbf{$p$ es más fuerte que $(p \vee q)$}}.
+
+    \vspace{0.4cm}
+    \item \textbf{$p$, $q$} \\
+    Llamemos $\alpha = p$ y $\beta = q$:
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $p \rightarrow q$ & $q \rightarrow p$ \\
+    \hline
+    V & V & V & V \\
+    V & F & F & V \\
+    F & V & V & F \\
+    F & F & V & V \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Ninguna de las dos columnas genera una tautología. Por lo tanto, \underline{\textbf{No hay relación de fuerza}} (son proposiciones incomparables).
+
+    \vspace{0.4cm}
+    \item \textbf{$p$, $(p \rightarrow q)$} \\
+    Llamemos $\alpha = p$ y $\beta = (p \rightarrow q)$:
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $p$ & $q$ & $\beta : (p \rightarrow q)$ & $\alpha \rightarrow \beta$ & $\beta \rightarrow \alpha$ \\
+    \hline
+    V & V & V & V & V \\
+    V & F & F & F & V \\
+    F & V & V & V & F \\
+    F & F & V & V & F \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Nuevamente, ninguna de las dos implicaciones resulta en una tautología completa. Por lo tanto, \underline{\textbf{No hay relación de fuerza}}.
+
+\end{enumerate}
+
+\vspace{0.4cm}
+\textbf{Pregunta final: ¿Cuál es la proposición más fuerte y cuál la más débil?}
+
+\begin{itemize}
+    \item La \textbf{más fuerte de todas} es \textbf{$False$}. Una contradicción implica lógicamente a cualquier otra proposición (el principio de \textit{ex falso quodlibet}). Al ser el antecedente falso, la implicación siempre es verdadera.
+    \item La \textbf{más débil de todas} es \textbf{$True$}. Una tautología es implicada por cualquier proposición. Al ser el consecuente verdadero, no importa el valor del antecedente, la implicación siempre se cumple.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
