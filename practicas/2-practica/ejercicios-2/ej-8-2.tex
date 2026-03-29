@@ -1,0 +1,59 @@
+\hypertarget{ej8}{}
+\noindent \textbf{Ejercicio 8.} Para los siguientes problemas, dar todas las soluciones posibles a las entradas dadas:
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item \texttt{proc indiceDelMaximo (in l: seq$\langle\mathbb{R}\rangle$): $\mathbb{Z}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ |l| > 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ 0 $\leq$ res < |l| $\wedge_L$ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |l| $\rightarrow_L$ l[i] $\leq$ l[res]) \}} \\
+    \texttt{\}}
+    \begin{enumerate}[label=\roman*)]
+        \item $l = \langle 1 ; 2 ; 3 ; 4 \rangle$
+        \item $l = \langle 15.5 ; -18 ; 4.215 ; 15.5 ; -1 \rangle$
+        \item $l = \langle 0 ; 0 ; 0 ; 0 ; 0 ; 0 \rangle$
+    \end{enumerate}
+
+    \vspace{0.4cm}
+    \item \texttt{proc indiceDelPrimerMaximo (in l: seq$\langle\mathbb{R}\rangle$): $\mathbb{Z}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ |l| > 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ 0 $\leq$ res < |l| $\wedge_L$ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |l| $\rightarrow_L$ (l[i] < l[res] $\vee$ (l[i] = l[res] $\wedge$ i $\geq$ res))) \}} \\
+    \texttt{\}}
+    \begin{enumerate}[label=\roman*)]
+        \item $l = \langle 1 ; 2 ; 3 ; 4 \rangle$
+        \item $l = \langle 15.5 ; -18 ; 4.215 ; 15.5 ; -1 \rangle$
+        \item $l = \langle 0 ; 0 ; 0 ; 0 ; 0 ; 0 \rangle$
+    \end{enumerate}
+
+    \vspace{0.4cm}
+    \item ¿Para qué valores de entrada \texttt{indiceDelPrimerMaximo} y \texttt{indiceDelMaximo} tienen necesariamente la misma salida?
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item En este procedimiento, la postcondición simplemente exige que el elemento en la posición \texttt{res} sea mayor o igual que todos los demás elementos. Es decir, \texttt{res} puede ser el índice de \textbf{cualquier} aparición del valor máximo.
+    \begin{enumerate}[label=\roman*)]
+        \item \textbf{Salidas posibles:} \texttt{res = 3} (el máximo es 4).
+        \item \textbf{Salidas posibles:} \texttt{res = 0} ó \texttt{res = 3} (el máximo 15.5 aparece en ambos índices).
+        \item \textbf{Salidas posibles:} \texttt{res $\in \{0, 1, 2, 3, 4, 5\}$} (todos los elementos son el máximo, 0, así que cualquier índice es válido).
+    \end{enumerate}
+
+    \vspace{0.4cm}
+    \item Aquí la postcondición agrega una restricción clave: si hay otro elemento igual al máximo (\texttt{l[i] = l[res]}), su índice \texttt{i} debe ser obligatoriamente mayor o igual a \texttt{res}. Esto fuerza a que \texttt{res} sea estrictamente el \textbf{primer} índice donde aparece el máximo (el que está más a la izquierda).
+    \begin{enumerate}[label=\roman*)]
+        \item \textbf{Salidas posibles:} \texttt{res = 3}.
+        \item \textbf{Salidas posibles:} \texttt{res = 0} (es la primera aparición del 15.5).
+        \item \textbf{Salidas posibles:} \texttt{res = 0} (es la primera aparición del 0).
+    \end{enumerate}
+
+    \vspace{0.4cm}
+    \item Tienen necesariamente la misma salida \textbf{sólo cuando el elemento máximo aparece exactamente una sola vez} en la secuencia. \\
+    Si el máximo aparece más de una vez (como en los casos ii y iii), \texttt{indiceDelMaximo} se vuelve no determinístico y permite devolver varias opciones, mientras que \texttt{indiceDelPrimerMaximo} está obligado a devolver únicamente la primera aparición.
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
