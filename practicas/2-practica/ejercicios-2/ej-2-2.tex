@@ -1,0 +1,50 @@
+\hypertarget{ej2}{}
+\noindent \textbf{Ejercicio 2.} Escriba los siguientes predicados sobre números enteros en lenguaje de especificación:
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{pred divide(x, y: $\mathbb{Z}$)} que sea verdadero si y sólo si $x$ divide a $y$ (es decir, el resto es 0).
+    \item \texttt{pred sonCoprimos(x, y: $\mathbb{Z}$)} que sea verdadero si y sólo si $x$ e $y$ son coprimos.
+    \item \texttt{pred mayorPrimoQueDivide(x: $\mathbb{Z}$, y: $\mathbb{Z}$)} que sea verdadero si $y$ es el mayor primo que divide a $x$.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{\texttt{pred divide(x: $\mathbb{Z}$, y: $\mathbb{Z}$)}} \\
+    Podemos definirlo de dos maneras equivalentes. Usando la operación módulo (asegurándonos de que $x$ no sea cero para no indefinir), o usando la definición formal con el cuantificador existencial. Cualquiera de las dos es válida:
+    \begin{itemize}
+        \item \texttt{pred divide(x: $\mathbb{Z}$, y: $\mathbb{Z}$) \{ x $\neq$ 0 $\wedge_L$ y $\bmod$ x = 0 \}}
+        \item \texttt{pred divide(x: $\mathbb{Z}$, y: $\mathbb{Z}$) \{ ($\exists$ k: $\mathbb{Z}$) (x $\times$ k = y) \}}
+    \end{itemize}
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred sonCoprimos(x: $\mathbb{Z}$, y: $\mathbb{Z}$)}} \\
+    Dos números son coprimos si el único divisor positivo que tienen en común es el 1. Acá empezamos a usar el predicado \texttt{divide} que armamos recién para modularizar:
+    \begin{multline*}
+    \texttt{pred sonCoprimos(x: $\mathbb{Z}$, y: $\mathbb{Z}$) \{} \\
+    \texttt{($\forall$ d: $\mathbb{Z}$) (d > 0 $\wedge$ divide(d, x) $\wedge$ divide(d, y) $\rightarrow$ d = 1) \}}
+    \end{multline*}
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred mayorPrimoQueDivide(x: $\mathbb{Z}$, y: $\mathbb{Z}$)}} \\
+    Desglosamos el problema en tres condiciones que deben cumplirse a la vez:
+    1. Que $y$ sea primo (usamos el predicado del Ejercicio 1).
+    2. Que $y$ divida a $x$.
+    3. Que cualquier otro número $p$ que también sea primo y divida a $x$, sea menor o igual a $y$ (esto garantiza que $y$ es el \textit{mayor} de todos ellos).
+    
+    \begin{multline*}
+    \texttt{pred mayorPrimoQueDivide(x: $\mathbb{Z}$, y: $\mathbb{Z}$) \{} \\
+    \texttt{esPrimo(y) $\wedge$ divide(y, x) $\wedge$} \\
+    \texttt{($\forall$ p: $\mathbb{Z}$) (esPrimo(p) $\wedge$ divide(p, x) $\rightarrow$ p $\leq$ y) \}}
+    \end{multline*}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
