@@ -1,0 +1,77 @@
+\hypertarget{ej11}{}
+\noindent \textbf{Ejercicio 11.} Sean $x$ y $res$ variables de tipo $\mathbb{R}$. Considerar los siguientes predicados:
+\begin{itemize}
+    \item $P_1: \{x \leq 0\}$, $P_2: \{x \leq 10\}$, $P_3: \{x \leq -10\}$
+    \item $Q_1: \{res \geq x^2\}$, $Q_2: \{res \geq 0\}$, $Q_3: \{res = x^2\}$
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+    \item Indicar la relación de fuerza entre $P_1$, $P_2$ y $P_3$.
+    \item Indicar la relación de fuerza entre $Q_1$, $Q_2$ y $Q_3$.
+    \item Escribir 2 programas que cumplan con la siguiente especificación: \\
+    \texttt{proc hagoAlgo (in x: $\mathbb{R}$): $\mathbb{R}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ x $\leq$ 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res $\geq$ x$^2$ \}} \\
+    \texttt{\}}
+    \item Sea A un algoritmo que cumple con la especificación del ítem anterior. Decidir si necesariamente cumple las siguientes especificaciones:
+    \begin{enumerate}[label=\roman*)]
+        \item requiere $\{x \leq -10\}$, asegura $\{res \geq x^2\}$
+        \item requiere $\{x \leq 10\}$, asegura $\{res \geq x^2\}$
+        \item requiere $\{x \leq 0\}$, asegura $\{res \geq 0\}$
+        \item requiere $\{x \leq 0\}$, asegura $\{res = x^2\}$
+        \item requiere $\{x \leq -10\}$, asegura $\{res \geq 0\}$
+        \item requiere $\{x \leq 10\}$, asegura $\{res = x^2\}$
+    \end{enumerate}
+    \item ¿Qué conclusión pueden sacar? ¿Qué debe cumplirse con respecto a las precondiciones y postcondiciones para que sea seguro reemplazar la especificación?
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Relación de fuerza entre $P_1$, $P_2$ y $P_3$:} \\
+    Recordemos que $A$ es más fuerte que $B$ si $A \rightarrow B$. \\
+    Si un número es menor a -10, seguro es menor a 0, y seguro es menor a 10. Por lo tanto: $P_3 \rightarrow P_1 \rightarrow P_2$. \\
+    \underline{$P_3$ es el más fuerte, $P_1$ es intermedio, y $P_2$ es el más débil.}
+
+    \vspace{0.4cm}
+    \item \textbf{Relación de fuerza entre $Q_1$, $Q_2$ y $Q_3$:} \\
+    Sabemos por matemática que todo número real al cuadrado es mayor o igual a cero ($x^2 \geq 0$). \\
+    Si $res = x^2$, entonces seguro $res \geq x^2$. Y si $res \geq x^2$, entonces seguro $res \geq 0$. Por lo tanto: $Q_3 \rightarrow Q_1 \rightarrow Q_2$. \\
+    \underline{$Q_3$ es el más fuerte, $Q_1$ es intermedio, y $Q_2$ es el más débil.}
+
+    \vspace{0.4cm}
+    \item \textbf{Dos programas que cumplan la especificación:}
+    \begin{itemize}
+        \item \textbf{Programa 1:} \texttt{res = x * x} (Cumple con el límite exacto de la postcondición).
+        \item \textbf{Programa 2:} \texttt{res = (x * x) + 1} (Como $x^2 + 1 \geq x^2$, este programa también hace verdadera la postcondición, demostrando el no-determinismo de la especificación).
+    \end{itemize}
+
+    \vspace{0.4cm}
+    \item \textbf{Análisis del Algoritmo A:}
+    \begin{enumerate}[label=\roman*)]
+        \item \textbf{Sí cumple.} Al pedir $x \leq -10$, le estamos dando al algoritmo datos aún más restringidos de los que necesita ($x \leq 0$). El algoritmo funcionará perfecto.
+        \item \textbf{No cumple.} Si le pasamos $x = 5$ (permitido por $x \leq 10$), rompemos la precondición original del algoritmo ($x \leq 0$) y su comportamiento se indefine (puede fallar).
+        \item \textbf{Sí cumple.} El algoritmo garantiza $res \geq x^2$. Como eso implica matemáticamente que $res \geq 0$, la nueva postcondición se satisface "de sobra".
+        \item \textbf{No cumple.} El algoritmo A podría ser el "Programa 2" del inciso anterior. Devolvería $x^2 + 1$, lo cual hace falsa la nueva postcondición estricta $res = x^2$.
+        \item \textbf{Sí cumple.} Combina una entrada más segura (i) y una salida menos exigente (iii). Es el escenario más seguro posible.
+        \item \textbf{No cumple.} Falla por partida doble: permite entradas inválidas para A y exige salidas exactas que A no garantiza.
+    \end{enumerate}
+
+    \vspace{0.4cm}
+    \item \textbf{Conclusión:} \\
+    Para que sea seguro utilizar un algoritmo en reemplazo de otro (o decir que cumple una nueva especificación), se deben cumplir simultáneamente dos reglas:
+    \begin{itemize}
+        \item \textbf{Precondición:} La nueva precondición debe ser \textbf{igual o más fuerte} que la original ($Pre_{nueva} \rightarrow Pre_{original}$). Esto asegura que el entorno filtrará los datos y el algoritmo nunca recibirá valores que no sepa manejar.
+        \item \textbf{Postcondición:} La nueva postcondición debe ser \textbf{igual o más débil} que la original ($Post_{original} \rightarrow Post_{nueva}$). Esto asegura que las garantías que ya daba el algoritmo son más que suficientes para satisfacer lo que ahora se pide.
+    \end{itemize}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
