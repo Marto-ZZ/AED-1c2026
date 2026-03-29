@@ -1,0 +1,43 @@
+\hypertarget{ej5}{}
+\noindent \textbf{Ejercicio 5.} Escribir una auxiliar que:
+
+\begin{enumerate}[label=\alph*)]
+    \item Sume 10 a un entero.
+    \item ``Devuelva'' el mayor elemento de una tupla de 3 enteros.
+    \item ``Devuelva'' el dígito menos significativo de un entero.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+Recordemos que la sintaxis general para definir una función auxiliar en la materia es: \\
+$\text{aux } \textit{nombre}(\textit{parametros}): \textit{tipo} = \textit{expresión}$
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Sume 10 a un entero} \\
+    Simplemente tomamos un parámetro de tipo $\mathbb{Z}$ y le sumamos el valor constante.
+    \[ \text{aux sumar10}(n: \mathbb{Z}): \mathbb{Z} = n + 10 \]
+
+    \vspace{0.4cm}
+    \item \textbf{Mayor elemento de una tupla de 3 enteros} \\
+    Sea $t$ una tupla de tres elementos de tipo $\mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}$. Usualmente accedemos a los elementos de una tupla mediante subíndices ($t_0, t_1, t_2$). Podemos utilizar la función \text{IfThenElse} para armar la lógica condicional:
+    \begin{multline*}
+    \text{aux maximoDeTres}(t: \mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}): \mathbb{Z} = \\
+    \text{IfThenElse}(t_0 \geq t_1 \wedge t_0 \geq t_2, \: t_0, \: \text{IfThenElse}(t_1 \geq t_2, \: t_1, \: t_2))
+    \end{multline*}
+    \textit{Nota: Otra forma 100\% válida (y más corta) si asumimos que ya existe una auxiliar básica \texttt{max(a,b)} es escribirlo como $\text{max}(t_0, \text{max}(t_1, t_2))$.}
+
+    \vspace{0.4cm}
+    \item \textbf{Dígito menos significativo de un entero} \\
+    El dígito menos significativo de un número en base 10 se obtiene calculando el resto de su división entera por 10 (operación módulo). Para evitar resultados indeseados si el número llega a ser negativo, es una excelente práctica aplicarle el valor absoluto primero.
+    \[ \text{aux digitoMenosSignificativo}(n: \mathbb{Z}): \mathbb{Z} = |n| \bmod 10 \]
+    
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
