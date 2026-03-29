@@ -1,0 +1,62 @@
+\hypertarget{ej13}{}
+\noindent \textbf{Ejercicio 13.} Especificar los siguientes problemas:
+
+\begin{enumerate}[label=\alph*)]
+    \item Dado un entero, decidir si es par.
+    \item Dado un entero $n$ y otro $m$, decidir si $n$ es un múltiplo de $m$.
+    \item Dado un entero, listar todos sus divisores positivos (sin duplicados).
+    \item Dado un entero positivo, obtener su descomposición en factores primos. Devolver una secuencia de tuplas $(p, e)$, donde $p$ es un factor primo y $e$ es su exponente, ordenada en forma creciente con respecto a $p$.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Decidir si es par} \\
+    Simplemente verificamos que el resto de la división por 2 sea cero. \\
+    \texttt{proc esPar (in x: $\mathbb{Z}$): bool \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res = True $\leftrightarrow$ x $\bmod$ 2 = 0 \}} \\
+    \texttt{\}}
+
+    \vspace{0.4cm}
+    \item \textbf{Decidir si $n$ es múltiplo de $m$} \\
+    \textit{Nota: Si usamos el operador módulo ($\bmod$), debemos exigir en la precondición que $m \neq 0$ para evitar una división por cero.} \\
+    \texttt{proc esMultiplo (in n: $\mathbb{Z}$, in m: $\mathbb{Z}$): bool \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ m $\neq$ 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res = True $\leftrightarrow$ n $\bmod$ m = 0 \}} \\
+    \texttt{\}}
+
+    \vspace{0.4cm}
+    \item \textbf{Listar todos sus divisores positivos (sin duplicados)} \\
+    Utilizamos la función auxiliar \texttt{sinRepetidos} (del Ejercicio 3) y la función \texttt{divide} (del Ejercicio 2). Pedimos que $x \neq 0$ para que la cantidad de divisores sea finita. \\
+    \texttt{proc divisoresPositivos (in x: $\mathbb{Z}$): seq$\langle\mathbb{Z}\rangle$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ x $\neq$ 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ sinRepetidos(res) $\wedge$} \\
+    \texttt{\hspace*{1.0cm} ($\forall$ d: $\mathbb{Z}$)(pertenece(d, res) $\leftrightarrow$ (d > 0 $\wedge$ divide(d, x))) \}} \\
+    \texttt{\}}
+
+    \vspace{0.4cm}
+    \item \textbf{Descomposición en factores primos} \\
+    Representamos las tuplas como elementos de $\mathbb{Z} \times \mathbb{Z}$, donde la primera componente ($t_0$) es el primo $p$ y la segunda ($t_1$) es el exponente $e$. Por el Teorema Fundamental de la Aritmética, si garantizamos que todas las bases en la secuencia son primas, que todos los exponentes son positivos (mayores a cero), y que el producto total da $x$, entonces es la factorización correcta. \\
+    \newpage
+    \texttt{proc factoresPrimos (in x: $\mathbb{Z}$): seq$\langle\mathbb{Z} \times \mathbb{Z}\rangle$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ x > 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ primosOrdenados(res) $\wedge$ productoFactores(res) = x \}} \\
+    \texttt{\}} \\
+    
+    \texttt{aux primosOrdenados(s: seq$\langle\mathbb{Z} \times \mathbb{Z}\rangle$): bool =} \\
+    \texttt{\hspace*{0.5cm} ($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |s| $\rightarrow_L$ (esPrimo(s[i]$_0$) $\wedge$ s[i]$_1$ > 0)) $\wedge$} \\
+    \texttt{\hspace*{0.5cm} ($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |s| - 1 $\rightarrow_L$ s[i]$_0$ < s[i+1]$_0$)} \\
+    
+    \texttt{aux productoFactores(s: seq$\langle\mathbb{Z} \times \mathbb{Z}\rangle$): $\mathbb{Z}$ = $\prod_{i=0}^{|s|-1} \text{s[i]}_0^{\text{s[i]}_1}$}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
