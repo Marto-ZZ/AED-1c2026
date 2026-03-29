@@ -1,0 +1,79 @@
+\hypertarget{ej4}{}
+\noindent \textbf{Ejercicio 4.} Escriba los siguientes predicados auxiliares sobre secuencias de enteros, aclarando los tipos de los parámetros que recibe:
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{pred pertenece(...)} que determina si un elemento pertenece a una secuencia.
+    \item \texttt{pred esPrefijo(...)} que determina si una secuencia es prefijo de otra.
+    \item \texttt{pred estáOrdenada (...)} que determina si la secuencia está ordenada de menor a mayor.
+    \item \texttt{pred primosEnPosicionesPares(...)} que determina si todos los números primos están en posiciones pares.
+    \item \texttt{pred hayUnoPrimoQueDivideAlResto(...)} que determina si hay un elemento primo en la secuencia que divide a todos los otros elementos de la secuencia.
+    \item \texttt{pred enTresPartes (...)}, que determina si en la secuencia aparecen primero 0s, después 1s y por último 2s. ¿Cómo modificaría la expresión para que se admitan cero apariciones?
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{\texttt{pred pertenece(e: $\mathbb{Z}$, s: seq$\langle\mathbb{Z}\rangle$)}} \\
+    Basta con verificar si existe algún índice válido en la secuencia donde el elemento guardado coincida con $e$. Usamos $\wedge_L$ para evitar leer $s[i]$ si la secuencia estuviera vacía o el índice fuera de rango.
+    \[ \texttt{pred pertenece(e: $\mathbb{Z}$, s: seq$\langle\mathbb{Z}\rangle$) \{ ($\exists$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| $\wedge_L$ s[i] = e) \}} \]
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred esPrefijo(s1: seq$\langle\mathbb{Z}\rangle$, s2: seq$\langle\mathbb{Z}\rangle$)}} \\
+    Para que $s1$ sea prefijo de $s2$, primero $s1$ debe ser de menor o igual longitud. Luego, todos los elementos de $s1$ deben coincidir exactamente con los primeros elementos de $s2$.
+    \begin{multline*}
+    \texttt{pred esPrefijo(s1: seq$\langle\mathbb{Z}\rangle$, s2: seq$\langle\mathbb{Z}\rangle$) \{} \\
+    \texttt{|s1| $\leq$ |s2| $\wedge$ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |s1| $\rightarrow_L$ s1[i] = s2[i]) \}}
+    \end{multline*}
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred estáOrdenada(s: seq$\langle\mathbb{Z}\rangle$)}} \\
+    Comparamos cada elemento con el siguiente. Iteramos hasta $|s| - 1$ para que, al evaluar el último elemento, $s[i+1]$ no se caiga del arreglo.
+    \[ \texttt{pred estáOrdenada(s: seq$\langle\mathbb{Z}\rangle$) \{ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| - 1 $\rightarrow_L$ s[i] $\leq$ s[i+1]) \}} \]
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred primosEnPosicionesPares(s: seq$\langle\mathbb{Z}\rangle$)}} \\
+    \textit{Nota: Asumimos índices basados en 0 (el primer elemento está en la posición 0, que es par).} \\
+    Decimos: "Para todo índice, SI el elemento en esa posición es primo, ENTONCES el índice debe ser par".
+    \begin{multline*}
+    \texttt{pred primosEnPosicionesPares(s: seq$\langle\mathbb{Z}\rangle$) \{} \\
+    \texttt{($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| $\wedge_L$ esPrimo(s[i]) $\rightarrow$ i $\bmod$ 2 = 0) \}}
+    \end{multline*}
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred hayUnoPrimoQueDivideAlResto(s: seq$\langle\mathbb{Z}\rangle$)}} \\
+    Reutilizamos el \texttt{esPrimo} y el \texttt{divide} (del Ejercicio 2).
+    \begin{multline*}
+    \texttt{pred hayUnoPrimoQueDivideAlResto(s: seq$\langle\mathbb{Z}\rangle$) \{} \\
+    \texttt{($\exists$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| $\wedge_L$ esPrimo(s[i]) $\wedge$} \\
+    \texttt{($\forall$ j: $\mathbb{Z}$) (0 $\leq$ j < |s| $\wedge$ i $\neq$ j $\rightarrow_L$ divide(s[i], s[j]))) \}}
+    \end{multline*}
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{pred enTresPartes(s: seq$\langle\mathbb{Z}\rangle$)}} \\
+    Para que haya estrictamente tres partes (al menos un 0, al menos un 1, y al menos un 2), deben existir dos índices de quiebre (los llamamos $i$ y $j$). El primero marca dónde empiezan los 1s, y el segundo dónde empiezan los 2s.
+    \begin{multline*}
+    \texttt{pred enTresPartes(s: seq$\langle\mathbb{Z}\rangle$) \{} \\
+    \texttt{($\exists$ i, j: $\mathbb{Z}$) (0 < i $\wedge$ i < j $\wedge$ j < |s| $\wedge$} \\
+    \texttt{($\forall$ k: $\mathbb{Z}$)(0 $\leq$ k < i $\rightarrow_L$ s[k] = 0) $\wedge$} \\
+    \texttt{($\forall$ k: $\mathbb{Z}$)(i $\leq$ k < j $\rightarrow_L$ s[k] = 1) $\wedge$} \\
+    \texttt{($\forall$ k: $\mathbb{Z}$)(j $\leq$ k < |s| $\rightarrow_L$ s[k] = 2)) \}}
+    \end{multline*}
+    
+    \textbf{Modificación para admitir cero apariciones:} \\
+    Si permitimos secuencias vacías o que falten bloques, los índices $i$ y $j$ pueden "pisarse" entre sí o colapsar en los bordes. Cambiamos las desigualdades estrictas ($<$) por desigualdades amplias ($\leq$) en las condiciones de los índices de quiebre:
+    \begin{multline*}
+    \texttt{pred enTresPartesModificado(s: seq$\langle\mathbb{Z}\rangle$) \{} \\
+    \texttt{($\exists$ i, j: $\mathbb{Z}$) (0 $\leq$ i $\wedge$ i $\leq$ j $\wedge$ j $\leq$ |s| $\wedge$} \\
+    \dots \text{(el resto de la fórmula se mantiene igual)} \dots \texttt{\}}
+    \end{multline*}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
