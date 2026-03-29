@@ -1,0 +1,28 @@
+\hypertarget{ej3}{}
+\noindent \textbf{Ejercicio 3.} Nombre los siguientes predicados auxiliares sobre secuencias de enteros:
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{pred ????(s: seq$\langle\mathbb{Z}\rangle$) \{ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| $\rightarrow_L$ s[i] > 0) \}}
+    \item \texttt{pred ????(s: seq$\langle\mathbb{Z}\rangle$) \{ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |s| $\rightarrow$ ($\forall$ j: $\mathbb{Z}$) (0 $\leq$ j < |s| $\wedge$ i $\neq$ j $\rightarrow_L$ s[i] $\neq$ s[j])) \}}
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{\texttt{todosPositivos(s: seq$\langle\mathbb{Z}\rangle$)}} (o \texttt{sonTodosPositivos}): \\
+    \textit{Justificación:} El cuantificador universal recorre todos los índices válidos de la secuencia (desde $0$ hasta $|s|-1$). El operador de implicación "luego" ($\rightarrow_L$) es clave acá: asegura que primero se cumpla que el índice está en rango antes de intentar acceder a $s[i]$, evitando que el programa explote. Finalmente, exige que todos los elementos en esas posiciones sean estrictamente mayores a cero.
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{sinRepetidos(s: seq$\langle\mathbb{Z}\rangle$)}} (o \texttt{elementosDistintos}): \\
+    \textit{Justificación:} Plantea que para cualquier par de índices válidos $i$ y $j$ dentro de la secuencia, si los índices son distintos ($i \neq j$), entonces los valores guardados en esas posiciones también deben ser distintos ($s[i] \neq s[j]$). Esto garantiza matemáticamente que no haya ningún elemento duplicado en toda la secuencia.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
