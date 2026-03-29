@@ -36,6 +36,7 @@ Cada pdf se puede volver un toque insoportable bajar 30+ páginas para ir a cada
 Dejo aca los links directos a cada práctica resuelta:
 
 - [Práctica 1](https://github.com/Marto-ZZ/AED-1c2026/blob/main/practicas/1-practica/1-sol.pdf)
+- [Práctica 2](https://github.com/Marto-ZZ/AED-1c2026/blob/main/practicas/2-practica/2-sol.pdf)
 
 ---
 
