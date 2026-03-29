@@ -1,0 +1,57 @@
+\hypertarget{ej7}{}
+\noindent \textbf{Ejercicio 7.} Las siguientes especificaciones no son correctas. Indicar por qué y corregirlas para que describan correctamente el problema.
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{proc progresionGeometricaFactor2()} Indica si la secuencia \texttt{l} representa una progresión geométrica factor 2. Es decir, si cada elemento de la secuencia es el doble del elemento anterior. \\
+    \texttt{proc progresionGeometricaFactor2 (in l: seq$\langle\mathbb{Z}\rangle$): bool \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res = True $\leftrightarrow$ ($\forall$ i: $\mathbb{Z}$) (0 $\leq$ i < |l| $\rightarrow_L$ l[i] = 2 * l[i - 1]) \}} \\
+    \texttt{\}}
+
+    \vspace{0.4cm}
+    \item \texttt{proc mínimo()} Devuelve en \texttt{res} el menor elemento de \texttt{l}. \\
+    \texttt{proc mínimo (in l: seq$\langle\mathbb{Z}\rangle$): $\mathbb{Z}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ ($\forall$ y: $\mathbb{Z}$)((y $\in$ l $\wedge$ y $\neq$ x) $\rightarrow$ y > res) \}} \\
+    \texttt{\}}
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Errores en \texttt{progresionGeometricaFactor2}:}
+    \begin{itemize}
+        \item \textbf{Índice fuera de rango:} El cuantificador universal evalúa desde $i=0$. Cuando $i=0$, la expresión intenta acceder a \texttt{l[i - 1]}, es decir, \texttt{l[-1]}, lo cual indefine la expresión (rompe el programa).
+    \end{itemize}
+    \textbf{Corrección:} Cambiamos el rango para que arranque a evaluar desde $i=1$. \\
+    \texttt{proc progresionGeometricaFactor2 (in l: seq$\langle\mathbb{Z}\rangle$): bool \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res = True $\leftrightarrow$ ($\forall$ i: $\mathbb{Z}$) (0 < i < |l| $\rightarrow_L$ l[i] = 2 * l[i - 1]) \}} \\
+    \texttt{\}} \\
+    \textit{Nota: Si la secuencia tiene longitud 0 o 1, el antecedente $0 < i < |l|$ es falso, por lo que el $\forall$ da Verdadero por vacuidad, lo cual es correcto matemático (una secuencia vacía o de un elemento es trivialmente una progresión).}
+
+    \vspace{0.4cm}
+    \item \textbf{Errores en \texttt{mínimo}:}
+    \begin{itemize}
+        \item \textbf{Precondición insuficiente:} No se puede obtener el mínimo de una secuencia vacía. El \texttt{requiere} debe exigir $|l| > 0$.
+        \item \textbf{Variable no declarada:} Se utiliza una variable $x$ que no existe ni en los parámetros ni está cuantificada.
+        \item \textbf{No asegura pertenencia:} Nunca se exige que el resultado (\texttt{res}) sea un elemento que efectivamente pertenezca a la secuencia \texttt{l}.
+        \item \textbf{Manejo de duplicados:} Al usar la desigualdad estricta ($y > res$), falla si el mínimo aparece repetido en la secuencia.
+    \end{itemize}
+\newpage
+    \textbf{Corrección:} Exigimos que la secuencia tenga elementos, que \texttt{res} pertenezca a la secuencia, y que sea menor o igual a todos los demás. \\
+    \texttt{proc mínimo (in l: seq$\langle\mathbb{Z}\rangle$): $\mathbb{Z}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ |l| > 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ pertenece(res, l) $\wedge$ ($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |l| $\rightarrow_L$ res $\leq$ l[i]) \}} \\
+    \texttt{\}}
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
