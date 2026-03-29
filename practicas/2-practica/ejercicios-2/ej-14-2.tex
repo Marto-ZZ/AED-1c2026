@@ -1,0 +1,74 @@
+\hypertarget{ej14}{}
+\noindent \textbf{Ejercicio 14.} Especificar los siguientes problemas sobre secuencias:
+
+\begin{enumerate}[label=\alph*)]
+    \item Dadas dos secuencias $s$ y $t$, decidir si $s$ está incluida en $t$ (todos los elementos de $s$ aparecen en $t$ en igual o mayor cantidad).
+    \item Dadas dos secuencias $s$ y $t$, devolver su intersección (cantidad mínima de apariciones si hay repetidos).
+    \item Dada una secuencia de números enteros, devolver aquel que divida a más elementos de la secuencia.
+    \item Dada una secuencia de secuencias de enteros $l$, devolver una secuencia de $l$ que contenga el máximo valor.
+    \item Dada una secuencia $l$ con todos sus elementos distintos, devolver la secuencia de partes (todas las subsecuencias manteniendo el orden).
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\textit{Nota: Para mantener las especificaciones legibles, asumiremos la existencia de auxiliares básicas vistas en ejercicios anteriores, como \texttt{apariciones(e, s)}, \texttt{pertenece(e, s)} y \texttt{divide(a, b)}.}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Decidir si $s$ está incluida en $t$} \\
+    Basta con pedir que para cualquier número entero, su cantidad de apariciones en $s$ sea menor o igual a sus apariciones en $t$. Si un elemento no está en $s$, sus apariciones son 0, lo cual siempre es $\leq$ a lo que haya en $t$. \\
+    \texttt{proc incluida (in s: seq$\langle\mathbb{Z}\rangle$, in t: seq$\langle\mathbb{Z}\rangle$): bool \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ res = True $\leftrightarrow$ ($\forall$ e: $\mathbb{Z}$)(apariciones(e, s) $\leq$ apariciones(e, t)) \}} \\
+    \texttt{\}}
+
+    \vspace{0.4cm}
+    \item \textbf{Intersección de dos secuencias} \\
+    Exigimos que las apariciones de cada elemento en la secuencia resultado (\texttt{res}) sea exactamente el mínimo entre sus apariciones en $s$ y en $t$. \\
+    \texttt{proc interseccion (in s: seq$\langle\mathbb{Z}\rangle$, in t: seq$\langle\mathbb{Z}\rangle$): seq$\langle\mathbb{Z}\rangle$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ ($\forall$ e: $\mathbb{Z}$)(apariciones(e, res) = min(apariciones(e, s), apariciones(e, t))) \}} \\
+    \texttt{\}} \\
+    \texttt{aux min(a: $\mathbb{Z}$, b: $\mathbb{Z}$): $\mathbb{Z}$ = IfThenElse(a < b, a, b)}
+
+    \vspace{0.4cm}
+    \item \textbf{Elemento que divide a más elementos} \\
+    Necesitamos que la secuencia tenga elementos para poder devolver uno. Luego, el \texttt{res} debe pertenecer a la secuencia y tener una cantidad de "divisibles" mayor o igual a la de cualquier otro elemento que también pertenezca a la secuencia. \\
+    \texttt{proc divideAMas (in s: seq$\langle\mathbb{Z}\rangle$): $\mathbb{Z}$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ |s| > 0 \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ pertenece(res, s) $\wedge$} \\
+    \texttt{\hspace*{1.0cm} ($\forall$ e: $\mathbb{Z}$)(pertenece(e, s) $\rightarrow$ divisibles(res, s) $\geq$ divisibles(e, s)) \}} \\
+    \texttt{\}} \\
+    \texttt{aux divisibles(d: $\mathbb{Z}$, s: seq$\langle\mathbb{Z}\rangle$): $\mathbb{Z}$ = $\sum_{i=0}^{|s|-1}$ IfThenElse(divide(d, s[i]), 1, 0)}
+
+    \vspace{0.4cm}
+    \item \textbf{Secuencia que contenga el máximo valor absoluto} \\
+    Para que exista un máximo, la secuencia de secuencias debe tener al menos una secuencia adentro, y esa secuencia no puede ser vacía. \\
+    \texttt{proc seqConMaximo (in l: seq$\langle$seq$\langle\mathbb{Z}\rangle\rangle$): seq$\langle\mathbb{Z}\rangle$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ |l| > 0 $\wedge$ ($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |l| $\rightarrow_L$ |l[i]| > 0) \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ perteneceSeq(res, l) $\wedge$} \\
+    \texttt{\hspace*{1.0cm} ($\exists$ e: $\mathbb{Z}$)(pertenece(e, res) $\wedge$ esMaximoAbsoluto(e, l)) \}} \\
+    \texttt{\}} \\
+    \texttt{aux esMaximoAbsoluto(e: $\mathbb{Z}$, l: seq$\langle$seq$\langle\mathbb{Z}\rangle\rangle$): bool =} \\
+    \texttt{\hspace*{0.5cm}($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |l| $\rightarrow_L$ ($\forall$ j: $\mathbb{Z}$)(0 $\leq$ j < |l[i]| $\rightarrow_L$ e $\geq$ l[i][j]))}
+
+    \vspace{0.4cm}
+    \item \textbf{Secuencia de partes (subconjuntos manteniendo orden)} \\
+    La forma más elegante de definir que $s$ es una subsecuencia de $l$ manteniendo el orden, es postular que existe una 'secuencia de índices' estrictamente creciente que mapea los elementos de $s$ con sus posiciones originales en $l$. \\
+    \texttt{proc partes (in l: seq$\langle\mathbb{Z}\rangle$): seq$\langle$seq$\langle\mathbb{Z}\rangle\rangle$ \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ sinRepetidos(l) \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ sinRepetidosSeq(res) $\wedge$} \\
+    \texttt{\hspace*{1.0cm} ($\forall$ s: seq$\langle\mathbb{Z}\rangle$)(perteneceSeq(s, res) $\leftrightarrow$ esSubsecuencia(s, l)) \}} \\
+    \texttt{\}} \\
+    \texttt{aux esSubsecuencia(s: seq$\langle\mathbb{Z}\rangle$, l: seq$\langle\mathbb{Z}\rangle$): bool = ($\exists$ idx: seq$\langle\mathbb{Z}\rangle$) (} \\
+    \texttt{\hspace*{0.5cm} |idx| = |s| $\wedge$ estrictamenteCreciente(idx) $\wedge$} \\
+    \texttt{\hspace*{0.5cm} ($\forall$ i: $\mathbb{Z}$)(0 $\leq$ i < |idx| $\rightarrow_L$ (0 $\leq$ idx[i] < |l| $\wedge_L$ l[idx[i]] = s[i])) )}
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
