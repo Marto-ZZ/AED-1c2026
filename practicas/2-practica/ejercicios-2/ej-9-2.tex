@@ -1,0 +1,44 @@
+\hypertarget{ej9}{}
+\noindent \textbf{Ejercicio 9.} Sea $f:\mathbb{R}\times\mathbb{R}\rightarrow\mathbb{R}$ definida como:
+\[ f(a,b) = \begin{cases} 
+      2 \times b & si~a < 0 \\
+      b - 1 & en~otro~caso 
+   \end{cases} \]
+Indicar cuáles de las siguientes especificaciones son correctas para el problema de calcular $f(a,b)$. Para aquellas que no lo son, indicar por qué.
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{asegura \{ (a < 0 $\wedge$ res = 2 $\times$ b) $\wedge$ (a $\geq$ 0 $\wedge$ res = b - 1) \}}
+    \item \texttt{asegura \{ (a < 0 $\wedge$ res = 2 $\times$ b) $\vee$ (a $\geq$ 0 $\wedge$ res = b - 1) \}}
+    \item \texttt{asegura \{ (a < 0 $\rightarrow$ res = 2 $\times$ b) $\vee$ (a $\geq$ 0 $\rightarrow$ res = b - 1) \}}
+    \item \texttt{asegura \{ res = IfThenElse(a < 0, 2 $\times$ b, b - 1) \}}
+\end{enumerate}
+\textit{(Nota: Omitimos la cabecera del proc y el requiere \{True\} por brevedad, evaluamos solo el asegura).}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Incorrecta.} \\
+    \textit{Motivo:} Utiliza una conjunción (\texttt{$\wedge$}) para unir los dos casos. Como es imposible que $a < 0$ y $a \geq 0$ sean verdaderos al mismo tiempo para un mismo número, la expresión completa siempre evaluará a \texttt{False}. Una postcondición que siempre es falsa significa que es imposible escribir un programa que la cumpla.
+
+    \vspace{0.4cm}
+    \item \textbf{Correcta.} \\
+    \textit{Motivo:} Utiliza una disyunción (\texttt{$\vee$}). Como los dominios de $a$ ($a < 0$ y $a \geq 0$) son mutuamente excluyentes y cubren todos los casos posibles, siempre una de las dos mitades del \texttt{$\vee$} será falsa por culpa de $a$, y la otra mitad será la encargada de exigir que \texttt{res} tenga el valor correcto. Es la forma clásica de escribir un 'if-else' con lógica proposicional.
+
+    \vspace{0.4cm}
+    \item \textbf{Incorrecta.} \\
+    \textit{Motivo:} Es un error lógico grave ("la trampa de la implicación con el OR"). Supongamos que $a = 5$. La primera parte es $(5 < 0 \rightarrow res = 2 \times b)$. Como el antecedente es Falso, la implicación completa es \textbf{Verdadera}. Como están unidas por un \texttt{$\vee$} (OR), basta con que esa primera mitad sea Verdadera para que \textbf{toda} la postcondición dé Verdadero, sin importar qué valor tome \texttt{res}. Es decir, si $a=5$, el algoritmo podría devolver cualquier verdura y la postcondición seguiría dando True.
+
+    \vspace{0.4cm}
+    \item \textbf{Correcta.} \\
+    \textit{Motivo:} Utiliza la función auxiliar predefinida \texttt{IfThenElse}, la cual mapea exactamente con la definición de una función partida matemática. Es la forma más legible y directa de especificar este problema.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
