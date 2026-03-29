@@ -1,0 +1,53 @@
+\hypertarget{ej10}{}
+\noindent \textbf{Ejercicio 10.} Considerar la siguiente especificación, junto con un algoritmo que dado $x$ devuelve $x^{2}$:
+
+\begin{verbatim}
+proc unoMasGrande (in x: R): R {
+    requiere { True }
+    asegura { res > x }
+}
+\end{verbatim}
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Qué devuelve el algoritmo si recibe $x=3$? ¿El resultado hace verdadera la postcondición de \texttt{unoMasGrande}?
+    \item ¿Qué sucede para las entradas $x=0.5$, $x=1$, $x=-0.2$ y $x=-7$?
+    \item Teniendo en cuenta lo respondido en los puntos anteriores, escribir una precondición para \texttt{unoMasGrande}, de manera tal que el algoritmo cumpla con la especificación.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Para $x = 3$:} \\
+    El algoritmo devuelve $x^2 = 3^2 = 9$. \\
+    Evaluamos la postcondición (\texttt{res > x}): $9 > 3$. Como esto es Verdadero, el resultado \textbf{sí hace verdadera la postcondición}.
+
+    \vspace{0.4cm}
+    \item \textbf{Evaluación de otras entradas:}
+    \begin{itemize}
+        \item Si $x = 0.5 \rightarrow \text{res} = 0.5^2 = 0.25$. Postcondición ($0.25 > 0.5$): \textbf{Falsa}.
+        \item Si $x = 1 \rightarrow \text{res} = 1^2 = 1$. Postcondición ($1 > 1$): \textbf{Falsa}.
+        \item Si $x = -0.2 \rightarrow \text{res} = (-0.2)^2 = 0.04$. Postcondición ($0.04 > -0.2$): \textbf{Verdadera}.
+        \item Si $x = -7 \rightarrow \text{res} = (-7)^2 = 49$. Postcondición ($49 > -7$): \textbf{Verdadera}.
+    \end{itemize}
+
+    \vspace{0.4cm}
+    \item \textbf{Precondición corregida:} \\
+    Para que el algoritmo siempre garantice que la postcondición sea verdadera, necesitamos restringir el dominio de entrada (el \texttt{requiere}) para que solo acepte valores de $x$ donde la inecuación $x^2 > x$ se cumpla matemáticamente. \\
+    
+    Resolvemos la inecuación:
+    $$x^2 > x$$
+    $$x(x - 1) > 0$$
+    
+    Esta parábola es positiva (mayor a cero) cuando $x$ está por fuera del intervalo de sus raíces (que son 0 y 1). Es decir, la condición se cumple estrictamente si $x < 0$ o si $x > 1$. \\
+    Por lo tanto, la precondición fuerte que hace que el algoritmo cumpla la especificación es:
+    
+    \begin{center}
+    \texttt{requiere \{ x < 0 $\vee$ x > 1 \}}
+    \end{center}
+
+\end{enumerate}
