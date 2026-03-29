@@ -1,0 +1,42 @@
+\hypertarget{ej6}{}
+\noindent \textbf{Ejercicio 6.} Sea $s$ una secuencia de elementos de tipo $\mathbb{Z}$. Escribir una auxiliar utilizando sumatoria y productoria que:
+
+\begin{enumerate}[label=\alph*)]
+    \item Cuente la cantidad de veces que aparece el elemento $e$ de tipo $\mathbb{Z}$ en la secuencia $s$.
+    \item Sume los elementos en las posiciones pares de la secuencia $s$.
+    \item Sume los elementos mayores a 0 contenidos en la secuencia $s$.
+    \item Sume los inversos multiplicativos ($1/x$) de los elementos contenidos en la secuencia $s$ distintos a 0.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Cuente la cantidad de veces que aparece el elemento $e$} \\
+    Usamos una sumatoria que recorre todos los índices de la secuencia. Por cada posición, evaluamos si el elemento es igual a $e$. Si es igual sumamos 1, si no, sumamos 0.
+    \[ \text{aux apariciones}(e: \mathbb{Z}, s: \text{seq}\langle\mathbb{Z}\rangle): \mathbb{Z} = \sum_{i=0}^{|s|-1} \text{IfThenElse}(s[i] = e, 1, 0) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Sume los elementos en las posiciones pares} \\
+    Recorremos todos los índices y usamos la operación módulo para verificar si el índice $i$ es par. Si lo es, sumamos el valor de la secuencia en esa posición ($s[i]$), caso contrario sumamos 0.
+    \[ \text{aux sumaPosicionesPares}(s: \text{seq}\langle\mathbb{Z}\rangle): \mathbb{Z} = \sum_{i=0}^{|s|-1} \text{IfThenElse}(i \bmod 2 = 0, s[i], 0) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Sume los elementos mayores a 0} \\
+    Similar a los anteriores, pero la condición del \texttt{IfThenElse} filtra por los valores estrictamente positivos de la secuencia.
+    \[ \text{aux sumaPositivos}(s: \text{seq}\langle\mathbb{Z}\rangle): \mathbb{Z} = \sum_{i=0}^{|s|-1} \text{IfThenElse}(s[i] > 0, s[i], 0) \]
+
+    \vspace{0.4cm}
+    \item \textbf{Sume los inversos multiplicativos de los elementos distintos a 0} \\
+    Acá debemos tener cuidado de no dividir por cero. Al agregar la condición $s[i] \neq 0$, garantizamos que la cuenta sea segura. Ojo con un detalle importante: como el inverso multiplicativo es una división ($1/x$), nuestra sumatoria ya no va a devolver un entero, ¡sino un número Real ($\mathbb{R}$)!
+    \[ \text{aux sumaInversos}(s: \text{seq}\langle\mathbb{Z}\rangle): \mathbb{R} = \sum_{i=0}^{|s|-1} \text{IfThenElse}(s[i] \neq 0, \frac{1}{s[i]}, 0) \]
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
