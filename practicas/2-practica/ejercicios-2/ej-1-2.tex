@@ -1,0 +1,28 @@
+\hypertarget{ej1}{}
+\noindent \textbf{Ejercicio 1.} Nombrar los siguientes predicados sobre enteros:
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{pred ????(x: $\mathbb{Z}$) \{ ($\exists$ c: $\mathbb{Z}$) (c > 0 $\wedge$ c * c = x) \}}
+    \item \texttt{pred ????(x: $\mathbb{Z}$) \{ ($\forall$ n: $\mathbb{Z}$) (1 < n < x $\rightarrow$ x $\bmod$ n $\neq$ 0) \}}
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{\texttt{esCuadradoPerfecto(x: $\mathbb{Z}$)}} (o \texttt{esCuadrado}): \\
+    \textit{Justificación:} El predicado exige que exista un número entero $c$ estrictamente positivo tal que, al multiplicarlo por sí mismo ($c \times c$), dé como resultado $x$. Esta es la definición matemática exacta de un cuadrado perfecto distinto de cero.
+
+    \vspace{0.4cm}
+    \item \textbf{\texttt{esPrimo(x: $\mathbb{Z}$)}}: \\
+    \textit{Justificación:} El predicado evalúa si para \textbf{todo} número entero $n$ estrictamente mayor a 1 y menor a $x$, el resto de la división entera entre $x$ y $n$ ($x \bmod n$) es distinto de cero. Es decir, está verificando que $x$ no tenga ningún divisor además del 1 y sí mismo, lo cual es la propiedad fundamental que define a un número primo.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
