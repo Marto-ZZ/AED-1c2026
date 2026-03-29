@@ -1,0 +1,61 @@
+\hypertarget{ej12}{}
+\noindent \textbf{Ejercicio 12.} Considerar las siguientes dos especificaciones, junto con un algoritmo $a$ que satisface la especificación de \texttt{p2}.
+
+\vspace{0.2cm}
+
+\noindent \texttt{proc p1(in x: $\mathbb{R}$, in n: $\mathbb{Z}$): $\mathbb{Z}$ \{} \\
+\texttt{\hspace*{0.5cm}requiere \{ x $\neq$ 0 \}} \\
+\texttt{\hspace*{0.5cm}asegura \{ x$^n$ - 1 < res $\leq$ x$^n$ \}} \\
+\texttt{\}}
+
+\vspace{0.2cm}
+
+\noindent \texttt{proc p2(in x: $\mathbb{R}$, in n: $\mathbb{Z}$): $\mathbb{Z}$ \{} \\
+\texttt{\hspace*{0.5cm}requiere \{ n $\leq$ 0 $\rightarrow$ x $\neq$ 0 \}} \\
+\texttt{\hspace*{0.5cm}asegura \{ res = $\lfloor x^n \rfloor$ \}} \\
+\texttt{\}}
+
+\vspace{0.2cm}
+
+\begin{enumerate}[label=\alph*)]
+    \item Dados valores de $x$ y $n$ que hacen verdadera la precondición de \texttt{p1}, demostrar que hacen también verdadera la precondición de \texttt{p2}.
+    \item Ahora, dados estos valores de $x$ y $n$, supongamos que se ejecuta $a$: llegamos a un valor de \texttt{res} que hace verdadera la postcondición de \texttt{p2}. ¿Será también verdadera la postcondición de \texttt{p1} con este valor de \texttt{res}?
+    \item ¿Podemos concluir que $a$ satisface la especificación de \texttt{p1}?
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Sea $Pre_{p1} \equiv x \neq 0$ y $Pre_{p2} \equiv (n \leq 0 \rightarrow x \neq 0)$. \\
+    Debemos demostrar que $Pre_{p1} \rightarrow Pre_{p2}$. \\
+    Asumimos que $Pre_{p1}$ es verdadera, es decir, sabemos como hecho que $x \neq 0$. \\
+    Analizamos $Pre_{p2}$: es una implicación lógica. Como el consecuente de la implicación ($x \neq 0$) es verdadero por nuestra asunción, toda la implicación $(n \leq 0 \rightarrow x \neq 0)$ resulta verdadera, sin importar el valor que tome $n$. \\
+    Por lo tanto, la precondición de \texttt{p2} también es verdadera.
+    
+    \vspace{0.4cm}
+    \item Sea $Post_{p2} \equiv res = \lfloor x^n \rfloor$ y $Post_{p1} \equiv x^n - 1 < res \leq x^n$. \\
+    Debemos analizar si $Post_{p2} \rightarrow Post_{p1}$. \\
+    Asumimos que $res = \lfloor x^n \rfloor$. Por la definición matemática de la función piso o parte entera ($\lfloor y \rfloor$), sabemos que devuelve el mayor número entero menor o igual a $y$. Por propiedad fundamental, se cumple para cualquier valor $y$ que: 
+    $$y - 1 < \lfloor y \rfloor \leq y$$
+    Reemplazando $y$ por $x^n$, obtenemos:
+    $$x^n - 1 < \lfloor x^n \rfloor \leq x^n$$
+    Como sabemos que $res = \lfloor x^n \rfloor$, reemplazamos en la inecuación:
+    $$x^n - 1 < res \leq x^n$$
+    ¡Que es exactamente $Post_{p1}$! Por lo tanto, \textbf{sí, será verdadera}.
+
+    \vspace{0.4cm}
+    \item \textbf{Sí, podemos concluir que $a$ satisface la especificación de \texttt{p1}.} \\
+    Para afirmar esto de forma rigurosa, se deben cumplir las dos condiciones de reemplazo seguro que dedujimos en el Ejercicio 11:
+    \begin{itemize}
+        \item $Pre_{p1} \rightarrow Pre_{p2}$ (Demostrado en el inciso a): Garantiza que \texttt{p1} filtra las entradas de forma más exigente, haciéndolas seguras para ejecutar el algoritmo $a$ (que asume algo más laxo en $Pre_{p2}$).
+        \item $Post_{p2} \rightarrow Post_{p1}$ (Demostrado en el inciso b): Garantiza que las salidas de $a$ (que asegura $Post_{p2}$) son suficientes para cumplir lo que se le exige a \texttt{p1}.
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
