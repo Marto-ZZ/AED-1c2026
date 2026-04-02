@@ -13,20 +13,20 @@
 
 ```
 AED-1c2026/
-├── practicas/               ← Carpeta de las prácticas teóricas
-|   ├── i-practica/          ← i representa el número de la práctica
-|   |   ├── ejercicios-i/    ← carpeta con cada ejercicio de la práctica i
-|   |   |   └── ej-z-i.tex   ← formato de archivo .tex de cada ejercicio número z de la guía i
-|   |   ├── i-sol.tex        ← guía resuelta en laTex
-|   |   └── i-sol.pdf        ← guía resuelta en pdf
-|   ├── macros/              ← Elementos de referencia para el archivo de soluciones
-|   |   └── preambulo.tex
-├── laboratorio/             ← Carpeta de las clases de laboratorio
-|   ├── i-labo/              ← i representa el orden con el que fueron dados los labos
-|   |   ├── src/             ← carpeta con todo el código dado en el labo
-|   |   |   ├── main/        ← archivo main de java
-|   |   |   └── test/        ← test para el archivo main
-|   |   └── clase.pdf        ← pdf dado en la clase
+├── practicas/                ← Carpeta de las prácticas teóricas
+│   ├── macros/               ← Elementos de referencia para el archivo de soluciones
+│   │   └── preambulo.tex
+│   └── i-practica/           ← i representa el número de la práctica
+│       ├── ejercicios-i/     ← carpeta con cada ejercicio de la práctica i
+│       │   └── ej-z-i.tex    ← formato de archivo .tex de cada ejercicio número z de la guía i
+│       ├── i-sol.tex         ← guía resuelta en laTex
+│       └── i-sol.pdf         ← guía resuelta en pdf
+└── laboratorio/              ← Carpeta de las clases de laboratorio
+    └── i-labo/               ← i representa el orden con el que fueron dados los labos
+        ├── src/              ← carpeta con todo el código dado en el labo
+        │   ├── main/         ← archivo main de java
+        │   └── test/         ← test para el archivo main
+        └── clase.pdf         ← pdf dado en la clase
 ```
 
 ---
