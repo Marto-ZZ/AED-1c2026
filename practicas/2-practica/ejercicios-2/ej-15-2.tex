@@ -1,0 +1,46 @@
+\hypertarget{ej15}{}
+\noindent \textbf{Ejercicio 15.} Dados dos enteros $a$ y $b$, se necesita calcular su suma y retornarla en un entero $c$. ¿Cuáles de las siguientes especificaciones son correctas para este problema? Para las que no lo son, indicar por qué.
+
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{proc sumar (inout a, b, c: $\mathbb{Z}$) \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ a + b = c \}} \\
+    \texttt{\}}
+
+    \item \texttt{proc sumar (in a, b: $\mathbb{Z}$, inout c: $\mathbb{Z}$) \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ True \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ c = a + b \}} \\
+    \texttt{\}}
+
+    \newpage
+
+    \item \texttt{proc sumar(inout a, b: $\mathbb{Z}$, inout c: $\mathbb{Z}$) \{} \\
+    \texttt{\hspace*{0.5cm}requiere \{ a = A$_0$ $\wedge$ b = B$_0$ \}} \\
+    \texttt{\hspace*{0.5cm}asegura \{ a = A$_0$ $\wedge$ b = B$_0$ $\wedge$ c = a + b \}} \\
+    \texttt{\}}
+\end{enumerate}
+
+\vspace{0.2cm}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+
+\textbf{Resolución:}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+
+    \item \textbf{Incorrecta.} \\
+    \textit{Motivo:} Al declarar $a$ y $b$ como parámetros \texttt{inout}, el procedimiento tiene permiso para modificarlos. En la cláusula \texttt{asegura}, las variables representan sus valores \textbf{finales} (después de ejecutar el código). Esta especificación solo exige que, al final, el valor de $c$ sea la suma de los valores resultantes de $a$ y $b$. Un programador podría escribir \texttt{a = 0; b = 0; c = 0;} y cumpliría perfectamente la postcondición ($0 + 0 = 0$), pero perdiendo por completo los números originales que queríamos sumar.
+
+    \vspace{0.4cm}
+    \item \textbf{Correcta.} \\
+    \textit{Motivo:} Al usar el modo \texttt{in} para $a$ y $b$, el lenguaje de especificación garantiza que el procedimiento no puede modificarlos (son variables de solo lectura). Por lo tanto, en la cláusula \texttt{asegura}, $a$ y $b$ valen obligatoriamente lo mismo que al principio de la ejecución. Exigir $c = a + b$ es totalmente seguro y hace exactamente lo que pide el enunciado.
+
+    \vspace{0.4cm}
+    \item \textbf{Correcta (aunque verbosa).} \\
+    \textit{Motivo:} A pesar de que $a$ y $b$ están declarados como \texttt{inout} (lo cual permite modificarlos), la especificación se "ata de manos" a sí misma utilizando las variables lógicas en mayúscula ($A_0$ y $B_0$). En el \texttt{requiere} "saca una foto" de los valores iniciales, y en el \texttt{asegura} obliga a que los valores finales de $a$ y $b$ sean idénticos a esa foto ($a = A_0 \wedge b = B_0$). Como garantizamos que no cambiaron, afirmar luego que $c = a + b$ es correcto. De todas formas, la opción \textbf{b} es la práctica ideal en AED.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
